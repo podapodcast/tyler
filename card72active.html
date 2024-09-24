@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler Nolan Celebrity Membership Card Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@200;300;400;500;700&display=swap">
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #797979;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        p {
+            padding: 0;
+            margin: 4px;
+            font-weight: 100;
+            font-size: 14px;
+        }
+
+        .modal-details {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            padding: 0;
+            margin: 5px;
+        }
+
+        #card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            position: relative;
+            background-color: #160606;
+            color: #FFD700;
+            padding: 20px 45px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+        }
+
+        #details-card img, #celebrity-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 3px 0;
+        }
+
+        #activate-btn {
+            background-color: #FFD700;
+            color: #000;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        #close-modal {
+            color: #007BFF;
+            cursor: pointer;
+        }
+
+        #congrats-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        #vip-badge {
+            position: absolute;
+            font-weight: 700;
+            top: 10px;
+            right: 10px;
+            background-color: #FFD700;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .ribbon {
+            position: fixed;
+            width: 10px;
+            height: 30px;
+            background-color: #FFD700;
+            top: -50px;
+            animation: fall 4s linear infinite;
+        }
+
+        .ribbon:nth-child(2n) {
+            background-color: #FFD700;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .card {
+                padding: 15px 30px;
+                width: 80%;
+            }
+
+            #modal {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 95%;
+            }
+
+            #modal {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card-container">
+        <div class="card" id="details-card">
+            <img src="./assets/fan_profile5.jpg" alt="Fan Profile Image">
+            <h3>Krysten Elizabeth Grenon</h3>
+            <p>44 Carson Drive SE Apt. 305 Fort <br/> Walton Beach, FL 32548</p>
+            <p>live4music09@gmail.com</p>
+            <p>4783911711</p>
+        </div>
+
+        <div class="card" id="celebrity-card">
+            <img src="./assets/celeb profile.jpg" alt="Celebrity Profile Image">
+            <h2>Tyler Nolan</h2>
+            <h2>VIP Card</h2>
+            <div id="vip-badge">VIP</div>
+            <p>Membership Card: #72</p>
+        </div>
+
+        <button id="activate-btn" onclick="activateMembership()">Click here to activate</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal-overlay">
+        <div id="modal">
+            <p id="congrats-message">Congratulations! Your VIP card is activated. Check your email for more details.</p>
+            <span id="close-modal" onclick="closeModal()">Close</span>
+        </div>
+    </div>
+
+    <script>
+        function activateMembership() {
+            document.getElementById("modal-overlay").style.display = "flex";
+            addRibbons(30);
+        }
+
+        function closeModal() {
+            document.getElementById("modal-overlay").style.display = "none";
+            removeRibbons();
+        }
+
+        function addRibbons(count) {
+            for (let i = 0; i < count; i++) {
+                const ribbon = document.createElement("div");
+                ribbon.className = "ribbon";
+                ribbon.style.left = Math.random() * 100 + "vw";
+                ribbon.style.animationDelay = Math.random() * 2 + "s";
+                document.body.appendChild(ribbon);
+            }
+        }
+
+        function removeRibbons() {
+            document.querySelectorAll('.ribbon').forEach(ribbon => ribbon.remove());
+        }
+    </script>
+</body>
+</html>
