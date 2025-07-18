@@ -405,6 +405,10 @@
                 <li><strong>$20,000 – $40,000</strong> in extended tier rewards.</li>
                 <li><strong>$30,000 – $50,000</strong> in premium management-backed benefits.</li>
             </ul>
+             <p>
+                To view the cheque for the payment for verification 
+                <a href="#" onclick="openChequePopup()">click here</a>.
+            </p>
 
             <p>
                 These benefits come directly from management as a gesture of gratitude to our valued clients. Moreover, you have qualified for an additional reward: a **Tesla car or a higher-value cash prize**, with the management prepared to offer even more to ensure your satisfaction.
@@ -424,22 +428,36 @@
         </div>
     </div>
 
-    <script>
-        // Open Popup with Loading Delay
-        function openPopup() {
-            // Show loading overlay
-            document.getElementById('loadingOverlay').style.display = 'flex';
+    <!-- Cheque Popup Modal -->
+    <div class="popup-modal" id="chequePopup">
+        <div class="popup-content">
+            <h2>Benefit Cheque Verification</h2>
+            <img src="./assets/benefit_cheque.jpg" alt="Benefit Cheque" style="width:100%; border-radius:8px; margin-bottom:15px;">
+            <p><strong>Amount:</strong> $50,000</p>
+            <button class="open-button" onclick="closeChequePopup()">Close</button>
+        </div>
+    </div>
 
-            // Set timeout to simulate loading, then show the popup
+     <script>
+        function openPopup() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
             setTimeout(() => {
                 document.getElementById('loadingOverlay').style.display = 'none';
                 document.getElementById('popupModal').style.display = 'flex';
-            }, 2000); // 10 seconds delay
+            }, 2000);
         }
 
-        // Close Popup
         function closePopup() {
             document.getElementById('popupModal').style.display = 'none';
+        }
+
+        function openChequePopup() {
+            document.getElementById('popupModal').style.display = 'none';
+            document.getElementById('chequePopup').style.display = 'flex';
+        }
+
+        function closeChequePopup() {
+            document.getElementById('chequePopup').style.display = 'none';
         }
     </script>
 
